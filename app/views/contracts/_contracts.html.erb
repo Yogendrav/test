@@ -1,0 +1,42 @@
+<% unless @contracts.blank? %>
+<table class="table">
+	<tr class="th-hide">
+        <th></th>
+        <th><%= sort_link @search, :contract_number, 'Broj ugovora' %></th>
+        <th><%= sort_link @search, :product_id, 'Proizvod' %></th>
+        <th><%= sort_link @search, :name, 'Klijent' %></th>
+		<th></th>
+		<th></th>
+	</tr>
+	<% @contracts.each do |contract| %>
+		<tr class="client-row" id="<%= contract.id %>">
+            <% unless contract.blank? %>
+              <% if !contract.valid_contract %>
+                  <td class="vazeci"><span class="label label-important" style="padding: 6px; font-size: 14px;">Ugovor ne vrijedi</span></td>
+              <% else %>
+                  <% if contract.contract_end_date < Date.current %>
+                      <td class="vazeci"><span class="label label-warning" style="padding: 6px; font-size: 14px;">Ugovor istekao</span></td>
+                  <% else %>
+                      <td class="vazeci"><span class="label label-success" style="padding: 6px; font-size: 14px;">Ugovor vrijedi</span></td>
+                  <% end %>
+              <% end %>
+            <% end %>
+		    <td><%= contract.contract_number %></td>
+            <td><%= contract.product.name %></td>
+		    <td><%= contract.client.name %></td>
+		    <td>
+			    <%#= link_to image_tag("details.png", :class => 'details'), contract, :class => 'hrefa' %>
+                <%= link_to image_tag("details.png", :class => 'details'), edit_contract_path(contract), :class => 'hrefa' %>
+            </td>
+		    <td><%= link_to 'Briši', contract, :method => :delete, :data => { :confirm => 'Jeste li sigurni da želite izbrisati ugovor?' }, :class => "btn btn-coffee brand brand-back hdr-back" %></td>
+		</tr>
+
+    <% end %>
+</table>
+<div>
+	<%= will_paginate @contracts %>
+</div>
+<% else %>
+    <h2> Niste unjeli niti jedan ugovor </h2>
+<% end %>
+<br />

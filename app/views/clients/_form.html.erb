@@ -1,0 +1,104 @@
+<%= nested_form_for @client, :url => { :action => "create" }, :html => { :class => 'well form-horizontal clearfix'} do |f| %>
+	
+	<div class="div-alert">
+	<% if @client.errors.any? %>
+		<div class="alert alert-error">
+			<button type="button" class="close" data-dismiss="alert">×</button>
+			<strong>Greška!</strong> Niste unijeli sve podatke: 
+			<ul>
+			<% @client.errors.full_messages.each do |msg| %>
+				<li><%= msg %></li>
+			<% end %>
+			</ul>
+		</div>
+		<br />
+	<% end %>
+	</div>
+
+	<div class="span5">
+		<fieldset>
+			<div class="control-group">
+				<%= f.label :oib, 'OIB', :class => "control-label" %>
+				<div class="controls">
+					<%= f.text_field :oib, :class => "input-xlarge oib frm-clients", :placeholder => "OIB klijenta...", :maxlength => 11 %>
+				</div>
+			</div>
+			<div class="control-group">
+				<%= f.label :name, 'Ime', :class => "control-label" %>
+				<div class="controls">
+					<%= f.text_field :name, :class => "input-xlarge frm-clients", :placeholder => "Ime klijenta..." %>
+				</div>
+			</div>
+			<div class="control-group">
+				<%= f.label :comment, 'Opis klijenta', :class => "control-label" %>
+				<div class="controls">
+					<%= f.text_area :comment, :rows => 6, :cols => 32 , :maxlength => 250, :class => "input-xlarge frm-clients", :placeholder => "Opis klijenta..." %>
+				</div>
+			</div>
+			<%= f.fields_for :emails do |fa| %>
+				<div class="control-group">
+					<%= fa.label :email, 'E-mail', :class => "control-label" %>
+					<div class="controls phones">
+						<%= fa.text_field :email, :class => "input-xlarge frm-clients", :placeholder => "Email klijenta..." %>
+						
+					</div>
+					<%= fa.link_to_remove '&times;'.html_safe, :class => "close phones-remove" %>
+				</div>
+			<% end %>
+			<div class="control-group">
+				<%= f.link_to_add "Dodaj email", :emails, :class => "btn btn-inverse btn-small phones-new" %>
+			</div>
+		</fieldset>
+	</div>
+	<div class="span3">
+		<fieldset>
+			<%= f.fields_for :addresses do |fa| %>
+				<div class="control-group">
+					<%= fa.label :ulica, 'Ulica', :class => "control-label" %>
+					<div class="controls phones">
+						<%= fa.text_field :ulica, :class => "input-xlarge frm-clients", :placeholder => "Ulica..." %>
+					</div>
+				</div>
+				<div class="control-group">
+					<%= fa.label :pbroj, 'Poštanski broj', :class => "control-label" %>
+					<div class="controls phones">
+						<%= fa.text_field :pbroj, :class => "input-xlarge frm-clients", :placeholder => "Poštanski broj..." %>
+					</div>
+				</div>
+				<div class="control-group">
+					<%= fa.label :mjesto, 'Mjesto', :class => "control-label" %>
+					<div class="controls phones">
+						<%= fa.text_field :mjesto, :class => "input-xlarge frm-clients", :placeholder => "Mjesto..." %>
+						<%= fa.link_to_remove '&times;'.html_safe, :class => "close phones-remove" %>
+					</div>
+				</div>
+			<% end %>
+			<div class="control-group">
+				<%= f.link_to_add "Dodaj adresu", :addresses, :class => "btn btn-inverse btn-small phones-new" %>
+			</div>
+
+			<%= f.fields_for :phones do |fa| %>
+				<div class="control-group">
+					<%= fa.label :number, 'Kontakt broj', :class => "control-label" %>
+					<div class="controls phones">
+						<%= fa.text_field :number, :class => "input-xlarge frm-clients", :placeholder => "Kontakt broj klijenta..." %>
+						<%= fa.link_to_remove '&times;'.html_safe, :class => "close phones-remove" %>
+					</div>
+				</div>
+				<div class="control-group">
+					<%= fa.label :type_phone, 'Tip kontakt broja', :class => "control-label" %>
+					<div class="controls">
+						<%= fa.select(:type_phone, {"Mobilni" => "1", "Fiksni" => "2"}, {}, { :class => 'input-xlarge frm-clients' }) %>
+					</div>
+				</div>
+			<% end %>
+			<div class="control-group">
+				<%= f.link_to_add "Dodaj telefon", :phones, :class => "btn btn-inverse btn-small phones-new" %>
+			</div>
+				<%= f.hidden_field :user_id,  :value => current_user.id %>
+			<div class="form-actions">
+				<%= f.submit "Dodaj klijenta", :class => "btn btn-large btn-primary btn-coffee" %>
+			</div>
+		</fieldset>
+	</div>
+<% end %>

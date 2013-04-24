@@ -1,0 +1,395 @@
+
+/* #####     Main style     ##### */
+/* ############################## */
+
+html, body { background: #f6f4f0; }
+
+body {
+    font: 14px "Droid Sans","Helvetica Neue",Helvetica,sans-serif;
+    line-height: 1.3em;
+}
+
+@font-face {
+  font-family: 'Droid Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Droid Sans'), local('DroidSans'), url(http://themes.googleusercontent.com/static/fonts/droidsans/v3/s-BiyweUPV0v-yRb-cjciBsxEYwM7FgeyaSgU71cLG0.woff) format('woff');
+}
+@font-face {
+  font-family: 'Droid Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Droid Sans Bold'), local('DroidSans-Bold'), url(http://themes.googleusercontent.com/static/fonts/droidsans/v3/EFpQQyG9GqCrobXxL-KRMQFhaRv2pGgT5Kf0An0s4MM.woff) format('woff');
+}
+
+
+/* #####     Header style     ##### */
+/* ################################ */
+
+.container-fluid {
+  padding-right: 0px;
+  padding-left: 0px;
+}
+
+.navbar-inner {
+  min-height: 40px;
+  padding-right: 20px;
+  padding-left: 20px;
+  background-color: #dfd6c7;
+  background-image: -moz-linear-gradient(top, #dfd6c7, #fff);
+  background-image: -ms-linear-gradient(top, #dfd6c7, #fff);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#dfd6c7), to(#fff));
+  background-image: -webkit-linear-gradient(top, #dfd6c7, #fff);
+  background-image: -o-linear-gradient(top, #dfd6c7, #fff);
+  background-image: linear-gradient(top, #dfd6c7, #fff);
+  background-repeat: repeat-x;
+  -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
+  filter: progid:dximagetransform.microsoft.gradient(startColorstr='#dfd6c7', endColorstr='#fff', GradientType=0);
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+     -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.logo { 
+  padding-right: 20px;
+  width: 48px;
+  height: 48px;
+  }
+
+.navbar-inner { border-bottom: 3px solid #d67844; }
+.navbar .brand { font-size: 24px; }
+.nav { padding: 10px 0 0 20px; }
+
+.navbar {
+    margin-bottom: 0;
+}
+
+.navbar .custom-brand {
+    color: #674a42;
+    /*text-shadow: 1px 1px 1px #ffffff;*/
+    font-weight: bold;
+}
+
+.navbar .brand-back {
+  /*margin: 6px 15px 0 10px;*/
+    color: #eee;
+    /*text-shadow: 1px 1px 1px #ffffff;*/
+    font-size: 14px;
+  padding: 7px 10px;
+  margin-top: 13px;
+  margin-right: 15px;
+  margin-left: 2px;
+  background-color: #222222;
+  *background-color: #333333;
+  background-image: -ms-linear-gradient(top, #222222, #333333);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#222222), to(#333333));
+  background-image: -webkit-linear-gradient(top, #222222, #333333);
+  background-image: -o-linear-gradient(top, #222222, #333333);
+  background-image: linear-gradient(top, #222222, #333333);
+  background-image: -moz-linear-gradient(top, #222222, #333333);
+  background-repeat: repeat-x;
+  border-color: #333333 #333333 #222222;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  filter: progid:dximagetransform.microsoft.gradient(startColorstr='#222222', endColorstr='#333333', GradientType=0);
+  filter: progid:dximagetransform.microsoft.gradient(enabled=false);
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.075);
+     -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.075);
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.075);
+}
+
+/*.navbar .hdr-username {
+  margin: 12px 0 0 -30px;
+    color: #eee;*/
+    /*text-shadow: 1px 1px 1px #ffffff;*/
+    /*font-size: 20px;
+}*/
+
+.brand-color {
+    color: blue;
+}
+
+.navbar .nav > li > a {
+    padding: 11px 10px 9px;
+    color: #674A42;
+    text-shadow: none;
+    border-bottom: 1px solid transparent;
+}
+
+.navbar .nav > li > a:hover, .navbar .nav > li > a.active {
+    color: #d67844;
+    text-shadow: none;
+    border-bottom: 1px solid #d67844;
+}
+
+.nav-collapse .nav > li > a:hover, .nav-collapse .dropdown-menu a:hover {
+    /*background-color: #eee; */
+}
+
+.hdr-admin { font-weight: bold; margin-top: 7px; }
+.hdr-username { font-weight: bold; border-left: 1px solid #d67844; margin-top: 7px; }
+
+.navbar .nav > li.hdr-username-nav > a {
+padding: 4px 10px 5px;
+color: #674A42;
+text-shadow: none;
+border-bottom: 1px solid transparent;
+}
+.navbar .nav > li.hdr-username-nav > a:hover {
+padding: 4px 10px 5px;
+color: #d67844;
+text-shadow: none;
+border-bottom: 1px solid transparent;
+}
+/*.hdr-back { border-radius: 25px; }*/
+
+
+/* -------------------------------------------------------------
+======  MEDIA QUERIES
+------------------------------------------------------------- */
+
+@media screen and (max-width: 1024px) { 
+  .frm-clients { width: 200px; }
+}
+
+
+@media (max-width: 768px) {
+  .top-space {
+        margin-top: 20px;
+    }
+    body footer .row {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    footer ul {
+        margin-left: 0;
+    }
+    .head-row {
+        padding: 10px 20px;
+    }
+    .navbar .custom-brand {
+        padding-left: 0;
+    }
+    .navbar-inner {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .frm-clients { width: 220px; }
+
+
+}
+@media (max-width: 979px) {
+    .input-xlarge { width: 250px; }
+
+  .frm-clients { width: 220px; }
+}
+
+
+/* #####     Content style     ##### */
+/* ################################# */
+
+.main { padding: 50px 0 0 0; }
+.content-left { padding: 50px 0 0 0; }
+.row-padding { padding-left: 20px;padding-right: 20px;}
+.btn-edit { width: 200px; height: 20px; }
+.well-show { margin-bottom: 5px; }
+.btn-search { width: 30%; padding: 12px; }
+
+
+/* #####     Login style     ##### */
+/* ############################### */
+
+.frm-login { padding: 3px; }
+
+
+
+
+/* #####     Form style     ##### */
+/* ############################### */
+
+.phones { width: 350px; }
+
+.phones-remove {
+  margin: 3px 0 0 0;
+  float: right;
+}
+
+.phones-new {
+  margin: 0 0 0 160px;
+  float: left;
+}
+
+.frm-password-note { padding-left: 44px; }
+
+
+/* #####     Table style     ##### */
+/* ################################ */
+
+@media 
+  only screen and (max-width: 760px),
+  (min-device-width: 768px) and (max-device-width: 1024px)  {
+  
+    /* Force table to not be like tables anymore */
+    table, thead, tbody, th, td, tr { 
+      display: block; 
+    }
+    
+    /* Hide table headers (but not display: none;, for accessibility) */
+    thead tr { 
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+    }
+    
+    tr { border: 1px solid #ccc; }
+    
+    td { 
+      /* Behave  like a "row" */
+      border: none;
+      border-bottom: 1px solid #eee; 
+      position: relative;
+      padding-left: 50%;
+    }
+
+    .table td { text-align: right; font-size: 12px; }
+    
+    td:before { 
+      /* Now like a table header */
+      position: absolute;
+      /* Top/left values mimic padding */
+      top: 6px;
+      left: 6px;
+      width: 45%; 
+      padding-right: 10px; 
+      white-space: nowrap;
+      width: 70px;
+    }
+    
+    td:nth-of-type(1):before { content: "OIB"; }
+    td:nth-of-type(2):before { content: "Ime"; }
+    td:nth-of-type(3):before { content: "Prezime"; }
+    td:nth-of-type(4):before { content: "Datum rođenja"; }
+
+
+    .th-hide { visibility:hidden; height: 10px; }
+
+  }
+  
+  /* Smartphones (portrait and landscape) ----------- */
+  @media only screen
+  and (min-device-width : 320px)
+  and (max-device-width : 480px) {
+    body { 
+      padding: 0; 
+      margin: 0; 
+      width: 320px; }
+}
+  
+  /* iPads (portrait and landscape) ----------- */
+  @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+    body { 
+      width: 495px; 
+    }
+  }
+
+  .table_icons { width: 22px; height: 22px; }
+
+
+/* #####     Footer style     ##### */
+/* ################################ */
+
+
+/* #####     bootstrap-custom style     ##### */
+/* ########################################## */
+
+.btn-custom {
+  background-color: hsl(0, 74%, 26%) !important;
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#c31d1d", endColorstr="#731111");
+  background-image: -khtml-gradient(linear, left top, left bottom, from(#c31d1d), to(#731111));
+  background-image: -moz-linear-gradient(top, #c31d1d, #731111);
+  background-image: -ms-linear-gradient(top, #c31d1d, #731111);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #c31d1d), color-stop(100%, #731111));
+  background-image: -webkit-linear-gradient(top, #c31d1d, #731111);
+  background-image: -o-linear-gradient(top, #c31d1d, #731111);
+  background-image: linear-gradient(#c31d1d, #731111);
+  border-color: #731111 #731111 hsl(0, 74%, 21.5%);
+  color: #fff !important;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.29);
+  -webkit-font-smoothing: antialiased;
+}
+
+.btn-coffee,
+.btn-coffee:hover {
+  color: #ffffff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+.btn-coffee.active {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.btn-coffee {
+  background-color: #d67844;
+  *background-color: #722f1c;
+  background-image: -ms-linear-gradient(top, #d67844, #722f1c);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#d67844), to(#722f1c));
+  background-image: -webkit-linear-gradient(top, #d67844, #722f1c);
+  background-image: -o-linear-gradient(top, #d67844, #722f1c);
+  background-image: -moz-linear-gradient(top, #d67844, #722f1c);
+  background-image: linear-gradient(top, #d67844, #722f1c);
+  background-repeat: repeat-x;
+  border-color: #d67844 #d67844 #722f1c;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  filter: progid:dximagetransform.microsoft.gradient(startColorstr='#d67844', endColorstr='#722f1c', GradientType=0);
+  filter: progid:dximagetransform.microsoft.gradient(enabled=false);
+}
+
+.btn-coffee:hover,
+.btn-coffee:active,
+.btn-coffee.active,
+.btn-coffee.disabled,
+.btn-coffee[disabled] {
+  background-color: #722f1c;
+  *background-color: #722f1c;
+
+}
+
+.btn-warning:active,
+.btn-warning.active {
+  background-color: #722f1c \9;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  float: left;
+  min-width: 160px;
+  padding: 4px 0;
+  margin: 1px 0 0;
+  list-style: none;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  *border-right-width: 2px;
+  *border-bottom-width: 2px;
+  -webkit-border-radius: 5px;
+     -moz-border-radius: 5px;
+          border-radius: 5px;
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+     -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  -webkit-background-clip: padding-box;
+     -moz-background-clip: padding;
+          background-clip: padding-box;
+}
+
+
+
+
+
+
+

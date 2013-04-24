@@ -1,0 +1,84 @@
+<%= nested_form_for @user, :url => { :action => "update" }, :html => { :class => 'well form-horizontal clearfix'} do |f| %>
+
+<div class="div-alert">
+	<% if @user.errors.any? %>
+		<div class="alert alert-error">
+			<button type="button" class="close" data-dismiss="alert">×</button>
+			<strong><%= pluralize(@user.errors.count, "Greška!") %></strong> Niste unjeli sve podatke: 
+			<ul>
+			<% @user.errors.full_messages.each do |msg| %>
+				<li><%= msg %></li>
+			<% end %>
+			</ul>
+		</div>
+		<br />
+	<% end %>
+	</div>
+	<div class="span5">
+		<fieldset>
+			<% if current_user.has_role? :admin %>
+			<div class="control-group">
+				<%= f.label :name, 'Ime', :class => "control-label" %>
+				<div class="controls">
+					<%= f.text_field :name, :class => "input-xlarge", :placeholder => "Ime suradnika..." %>
+				</div>
+			</div>
+			<div class="control-group">
+				<%= f.label :surname, 'Prezime', :class => "control-label" %>
+				<div class="controls">
+					<%= f.text_field :surname, :class => "input-xlarge", :placeholder => "Prezime suradnika..." %>
+				</div>
+			</div>
+			<% end %>
+			<div class="control-group">
+				<%= f.label :username, 'Korisničko ime', :class => "control-label" %>
+				<div class="controls">
+					<%= f.text_field :username, :class => "input-xlarge" %>
+				</div>
+			</div>
+			<div class="control-group">
+				<%= f.label :password, 'Lozinka', :class => "control-label" %>
+				<div class="controls">
+					<%= f.password_field :password, :class => "input-xlarge" %>
+				</div>
+			</div>
+			<div class="control-group">
+				<%= f.label :password_confirmation, 'Ponovljena lozinka', :class => "control-label" %>
+				<div class="controls">
+					<%= f.password_field :password_confirmation, :class => "input-xlarge" %>
+				</div>
+			</div>
+			<% if current_user.has_role? :admin %>
+			<div class="control-group">
+				<%= f.label :email, 'E-mail', :class => "control-label" %>
+				<div class="controls">
+					<%= f.text_field :email, :class => "input-xlarge", :placeholder => "E-mail suradnika..." %>
+				</div>
+			</div>
+			<%= f.fields_for :user_phones do |fa| %>
+				<div class="control-group">
+					<%= fa.label :number, 'Kontakt broj', :class => "control-label" %>
+					<div class="controls phones">
+						<%= fa.text_field :number, :class => "input-xlarge", :placeholder => "Kontakt broj suradnika..." %>
+						<%= fa.link_to_remove '&times;'.html_safe, :class => "close phones-remove pull-right" %>
+					</div>
+
+				</div>
+				<div class="control-group">
+					<%= fa.label :type_phone, 'Tip kontakt broja', :class => "control-label" %>
+					<div class="controls">
+						<%= fa.select(:type_phone, {"Mobilni" => "1", "Fiksni" => "2"}, {}, { :class => 'input-xlarge' }) %>
+					</div>
+				</div>
+			<% end %>
+			<div class="control-group">
+				<%= f.link_to_add "Dodaj telefon", :user_phones, :class => "btn btn-inverse btn-small phones-new" %>
+			</div>
+			<% end %>
+			<%= f.hidden_field :superior,  :value => @user.superior %>
+			<div class="form-actions">
+				<%= f.submit "Spremi promjene", :class => "btn btn-large btn-primary btn-custom" %>
+			</div>
+		</fieldset>
+	</div>
+<% end %>

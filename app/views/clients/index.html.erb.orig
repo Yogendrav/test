@@ -1,0 +1,38 @@
+<div class="row-fluid main">
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="row-fluid">
+<<<<<<< HEAD
+				<div class="span12">
+					<div class="row-fluid">
+						<div class="span8">
+							
+						</div>
+						<div class="span4">
+							<%= render 'info' %>
+=======
+				<div class="span4">
+					<div class="stats_overview stats_next">
+						<div class="overview_today">
+							<p class="overview_day">ukupno</p>
+							<p class="overview_day"><%= @info %></p> <!-- TREBA BIT VEĆE -->
+							<p class="overview_type">klijenata</p>
+>>>>>>> new_era_test
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row-fluid content">
+		<div class="span12 content-left row-padding">
+			
+			<h2>Klijenti</h2>
+			<%= render 'search' if current_page?('/clients') %>
+			<br />
+				<div class="clients">
+					<%= render 'clients' %>
+				</div>
+		</div>
+	</div>
+</div>

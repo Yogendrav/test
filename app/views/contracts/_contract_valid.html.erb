@@ -1,0 +1,5 @@
+<% if @contract.valid_contract %>
+    <%=  link_to "Ukini ugovor", contract_valid_path(id: @contract.id, contract_state: false), remote: true, id: "ugovor-false", class: "btn btn-large btn-danger state-ugovor" %>
+<% else %>
+    <%=  link_to "Produži ugovor", contract_valid_path(id: @contract.id, contract_state: true), remote: true, id: "ugovor-true", class: "btn btn-large btn-success state-ugovor" %>
+<% end %>

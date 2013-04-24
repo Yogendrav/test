@@ -1,0 +1,192 @@
+<script>
+
+    $(function(){
+
+        $('.state-ugovor').click(function(){
+            if($(this).attr('id') == "ugovor-false"){
+                $("ugovor-false").hide();
+            } else {
+
+            }
+        });
+
+        var product_id = $('.proizvod').val();
+        $.ajax({
+            url: '/get_price_on_select',
+            type: 'POST',
+            dataType: 'json',
+            data: {"product_id" : product_id},
+            success: function(data) {
+                $(".product-price").val(data.purchase_price);
+            }
+        });
+
+        $('.proizvod').change(function(){
+
+            var product_id = $(this).val();
+            $.ajax({
+                url: '/get_price_on_select',
+                type: 'POST',
+                dataType: 'json',
+                data: {"product_id" : product_id},
+                success: function(data) {
+                    $(".product-price").val(data.purchase_price);
+                }
+            });
+        });
+
+        $('.kolicina, .prodajna-cijena').keyup(function(){
+
+            var kolicina = $('.kolicina').val();
+
+            var prodajna_cijena = $('.prodajna-cijena').val();
+
+            var product_price = $('.product-price').val();
+
+            var razlika = (prodajna_cijena * kolicina) - (product_price * kolicina);
+
+            $('.razlika').val(razlika);
+
+
+        });
+
+        /* OVO JE DIO ZA DATUM */
+
+
+        $('.trajanje_ugovora').keyup(function(){
+
+            var dateup = parseInt($(this).val());
+            var contract_date = new Date($('.contract_date').val()); /*, 'dd-mm-yy'*/
+
+            if($("select.trajanje-dropdown option").filter(":selected").val() == 1){
+
+                contract_date.setMonth(contract_date.getMonth() + dateup);
+                $('.zavrsetak-ugovora').val($.datepicker.formatDate('yy-mm-dd', contract_date));
+
+            } else {
+                contract_date.setFullYear(contract_date.getFullYear() + dateup);
+                $('.zavrsetak-ugovora').val($.datepicker.formatDate('yy-mm-dd', contract_date));
+            }
+        });
+
+        $('.trajanje-dropdown').change(function(){
+
+            var dateup = parseInt($(this).val());
+            var contract_date = new Date($('.contract_date').val()); /*, 'dd-mm-yy'*/
+
+            if($("select.trajanje-dropdown option").filter(":selected").val() == 1){
+
+                contract_date.setMonth(contract_date.getMonth() + dateup);
+                $('.zavrsetak-ugovora').val($.datepicker.formatDate('yy-mm-dd', contract_date));
+
+            } else {
+                contract_date.setFullYear(contract_date.getFullYear() + dateup - 1);
+                $('.zavrsetak-ugovora').val($.datepicker.formatDate('yy-mm-dd', contract_date));
+            }
+        });
+    })
+</script>
+<%= nested_form_for @contract, :url => { :action => "update" }, :html => { :class => 'well form-horizontal clearfix'} do |f| %>
+
+    <div class="div-alert">
+      <% if @contract.errors.any? %>
+          <div class="alert alert-error">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>Greška!</strong> Niste unijeli sve podatke:
+            <ul>
+              <% @contract.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+          </div>
+      <% end %>
+      <div class="span5">
+        <fieldset>
+          <div class="control-group">
+            <%= f.label  :contract_number, 'Broj ugovora', :class => "control-label" %>
+            <div class="controls">
+              <%= f.text_field  :contract_number, :class => "input-xlarge frm-clients kolicina", :placeholder => "Broj ugovora..." %>
+            </div>
+          </div>
+          <div class="control-group">
+            <%= f.label :client_id, 'Klijent', :class => "control-label" %>
+            <div class="controls">
+              <%= f.collection_select :client_id, Client.all, :id, :name, { selected: @contract.client_id }, { :class => 'input-xlarge frm-clients' } %>
+            </div>
+          </div>
+          <div class="control-group">
+            <%= f.label :product_id, 'Proizvod', :class => "control-label" %>
+            <div class="controls">
+              <%= f.collection_select :product_id, Product.all, :id, :name, { :selected => @contract.product_id  }, { :class => 'input-xlarge frm-clients proizvod' } %>
+            </div>
+          </div>
+          <div class="control-group">
+            <%= f.label :contract_date, 'Datum početka', :class => "control-label" %>
+            <div class="controls">
+              <%= f.datepicker 'contract_date', :class => "input-xlarge frm-clients contract_date", dateFormat: "yy-mm-dd"  %>
+            </div>
+          </div>
+          <div class="control-group">
+            <%= label_tag 'Trajanje ugovora', "Trajanje ugovora", :class => "control-label" %>
+            <div class="controls">
+
+              <%= text_field_tag 'Trajanje ugovora', "", :class => "input-small frm-clients trajanje_ugovora" %>
+              <%= select_tag("dropdown-trajanje", options_for_select([["Mjeseci", 1], ["Godine", 2]]),  class: 'input-medium frm-clients trajanje-dropdown' ) %>
+
+            </div>
+          </div>
+          <div class="control-group">
+            <%= f.label :contract_end_date, 'Završetak ugovora', :class => "control-label" %>
+            <div class="controls">
+              <%= f.text_field :contract_end_date, :class => "input-xlarge frm-clients zavrsetak-ugovora", disabled: true  %>
+              <%= f.hidden_field :contract_end_date, :class => "zavrsetak-ugovora" %>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+      <div class="span5">
+        <fieldset>
+          <div class="control-group">
+            <%= label_tag "product_price", 'Nabavna cijena', :class => "control-label" %>
+            <div class="controls">
+              <%= text_field_tag "product_price", "", :class => "input-xlarge frm-clients product-price", disabled: true, :placeholder => "Razlika..." %>
+            </div>
+          </div>
+          <div class="control-group">
+            <%= f.label :quantity, 'Količina', :class => "control-label" %>
+            <div class="controls">
+              <%= f.text_field :quantity, :class => "input-xlarge frm-clients kolicina", :placeholder => "Količina..." %>
+            </div>
+          </div>
+          <div class="control-group">
+            <%= f.label :selling_price, 'Prodajna cijena', :class => "control-label" %>
+            <div class="controls">
+              <%= f.text_field :selling_price, :class => "input-xlarge frm-clients prodajna-cijena", :placeholder => "Prodajna cijena..." %>
+            </div>
+          </div>
+          <div class="control-group">
+            <%= f.label :difference_price, 'Razlika', :class => "control-label" %>
+            <div class="controls">
+              <%= f.text_field :difference_price, :class => "input-xlarge frm-clients razlika", disabled: true, :placeholder => "Razlika..." %>
+              <%= f.hidden_field :difference_price, :class => "razlika" %>
+            </div>
+          </div>
+          <%= f.hidden_field :user_id,  :value => current_user.id %>
+
+          <div class="form-actions">
+            <span class="state-buttons">
+              <%= render partial: "contract_valid" %>
+            </span>
+            <%= f.submit "Spremi promjene", :class => "btn btn-large btn-primary btn-custom btn-coffee" %>
+          </div>
+          <div class="product-change">
+            <%= render :partial => 'product_price', :object => @products %>
+          </div>
+        </fieldset>
+      </div>
+<% end %>
+
+
+
+

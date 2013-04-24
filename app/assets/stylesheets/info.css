@@ -1,0 +1,64 @@
+.clients-num-div{
+	border: 1px solid gray;
+	width: 200px;
+	background-color: #d6e9c6;
+}
+
+.stats_overview {
+	background: #F6F6F6;
+	border: 1px solid #ccc;
+	width: 100px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	float: right;
+}
+.stats_overview:hover {
+	background: #dff0d8;
+	border: 1px solid #d6e9c6;
+	//color: #468847;
+	width: 100px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	float: right;
+}
+
+.stats_next{
+	margin-left: 10px;
+}
+
+.overview_today, .overview_previous {
+	width: 100%;
+}
+
+.stats_overview p.overview_day {
+	font-size: 14px;
+	font-weight: bold;
+	margin: 12px 0;
+}
+
+.stats_overview p {
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	text-transform: uppercase;
+	text-shadow: 0 1px 0 #fff;
+}
+
+.stats_overview p.overview_count {
+	font-size: 46px;
+	font-weight: bold;
+	color: #333333;
+	margin-bottom: 12px;
+}
+
+.stats_overview p.overview_type {
+	font-size: 12px;
+	color: #999999;
+	margin-bottom: 8px;
+}

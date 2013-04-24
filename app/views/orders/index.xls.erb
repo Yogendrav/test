@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+          xmlns:o="urn:schemas-microsoft-com:office:office"
+          xmlns:x="urn:schemas-microsoft-com:office:excel"
+          xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+          xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Styles>
+    <Style ss:ID="Default" ss:Name="Normal">
+        <Alignment ss:Vertical="Bottom"/>
+        <Borders/>
+        <Font/>
+        <Interior/>
+        <NumberFormat/>
+        <Protection/>
+    </Style>
+    <Style ss:ID="s1">
+        <Alignment ss:Vertical="Center"/>
+        <Borders>
+            <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="2"/>
+            <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="2"/>
+            <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="2"/>
+            <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="2"/>
+        </Borders>
+        <ss:Font ss:Bold="1" ss:Size="16"/>
+        <Interior ss:Color="#2ab8d6" ss:Pattern="Solid"/>
+    </Style>
+    <Style ss:ID="s2">
+        <Alignment ss:Vertical="Center" ss:Horizontal="Center"/>
+        <Borders>
+            <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="2"/>
+            <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="2"/>
+
+        </Borders>
+        <ss:Font ss:Size="14"/>
+    </Style>
+    <ss:Style ss:ID="s3">
+      <ss:Font ss:Bold="1" ss:Size="16"/>
+    </ss:Style>
+    <ss:Style ss:ID="s4">
+      <ss:Font ss:Size="14"/>
+    </ss:Style>
+    <Style ss:ID="s5">
+        <Alignment ss:Vertical="Center"/>
+        <Borders>
+            <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="2"/>
+        <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="2"/>
+        <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="2"/>
+        <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="2"/>
+        </Borders>
+        <ss:Font ss:Bold="1" ss:Size="16"/>
+        <Interior ss:Color="#f07635" ss:Pattern="Solid"/>
+    </Style>
+  </Styles>
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <ss:Column ss:Width="200"/>
+      <ss:Column ss:Width="200"/>
+      <ss:Column ss:Width="200"/>
+      <Row>
+      </Row>
+      <Row>
+      </Row>
+      <Row>
+        <Cell ss:StyleID="s3" ><Data ss:Type="String"><B>Narudžba br.</B></Data></Cell>
+        <Cell ss:StyleID="s4"><Data ss:Type="String"><%= @dateplusone.strftime("%d%m%Y") %></Data></Cell>
+        <Cell ss:StyleID="s3"><Data ss:Type="String">DATUM: <%= DateTime.now.strftime("%d.%m.%Y") %></Data></Cell>
+
+      </Row>
+      <Row>
+      </Row>
+      <Row>
+        <Cell ss:StyleID="s1"><Data ss:Type="String">ID kupca</Data></Cell>
+        <Cell ss:StyleID="s1"><Data ss:Type="String">Naziv kupca</Data></Cell>
+        <Cell ss:StyleID="s1"><Data ss:Type="String">Adresa kupca</Data></Cell>
+      </Row>
+      <% @orders_today.each do |order| %>
+          <Row>
+            <Cell ss:StyleID="s2"><Data ss:Type="Number"><%= order.id %></Data></Cell>
+            <Cell ss:StyleID="s2"><Data ss:Type="String"><%= order.client.name %></Data></Cell>
+            <Cell ss:StyleID="s2"><Data ss:Type="String"><%= order.client.addresses.map(&:ulica)[0]%> <%= order.client.addresses.map(&:mjesto)[0]%></Data></Cell>
+          </Row>
+          <Row>
+          </Row>
+          <Row>
+            <Cell ss:StyleID="s5"><Data ss:Type="String">ID proizvoda</Data></Cell>
+            <Cell ss:StyleID="s5"><Data ss:Type="String">Naziv proizvoda</Data></Cell>
+            <Cell ss:StyleID="s5"><Data ss:Type="String">Količina</Data></Cell>
+          </Row>
+        <% Invoice.where(order_id: order.id).each do |invoice| %>
+
+            <Row>
+              <Cell ss:StyleID="s2"><Data ss:Type="String"><%= invoice.product.id %></Data></Cell>
+              <Cell ss:StyleID="s2"><Data ss:Type="String"><%= invoice.product.name %></Data></Cell>
+              <Cell ss:StyleID="s2"><Data ss:Type="String"><%= invoice.quantity %></Data></Cell>
+            </Row>
+        <% end %>
+      <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

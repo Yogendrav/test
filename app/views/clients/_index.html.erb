@@ -1,0 +1,30 @@
+<script type="text/javascript">
+
+	$('.search-oib').click(function(){
+		$(this).html('<input type="text">');
+	});
+
+</script>
+<table class="table">
+	<tr class="th-hide">
+		<th><%= sort_link @search, :oib %></th>
+		<th><%= sort_link @search, :name, 'Ime' %></th>
+		<th></th>
+		<th>Detalji</th>
+		<th></th>
+	</tr>
+	<% @clients.each do |client| %>
+		<tr class="client-row" id="<%= client.id %>">
+			<td><%= client.oib %></td>
+			<td><%= client.name %></td>
+			<td><%= client.comment %></td>
+			<td><%= link_to image_tag("details.png", :class => 'details'), client, :class => 'hrefa' %></td>
+			<td><%= link_to 'Briši', client, :method => :delete, :data => { :confirm => 'Jeste li sigurni da želite izbrisati stranku?' }, :class => "btn btn-coffee brand brand-back hdr-back" %></td>
+		</tr>
+	<% end %>
+</table>
+<br />
+<div class="pagination pagination-centered">
+	<%= will_paginate @clients %>
+</div>
+	

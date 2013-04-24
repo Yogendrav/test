@@ -1,0 +1,39 @@
+<div class="row-fluid">
+  <div class="form-actions">
+    <%= link_to 'Uredi', edit_client_path(@client), :class => "btn btn-warning btn-edit btn-coffee" %>
+    <% if 1 == @client.client_type %>
+              <%= link_to 'Novi proizvod', new_product_path(:client => @client), :class => "btn btn-warning btn-edit btn-coffee" %>
+            <% else %>
+              <%= link_to 'Nova naruđba', new_contract_path(:client => @client), :class => "btn btn-warning btn-edit btn-coffee" %>
+            <% end %>
+    
+  </div>
+</div>
+<div class="row-fluid">
+  <table class="table">
+    <tr>
+      <th>Ime proizvoda</th>
+      <th>Količina</th>
+      <th>Nabavna cijena</th>
+      <th>Prodajna cijena</th>
+      <th>Razlika u cijeni</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+
+    <% @products.each do |product| %>
+        <tr>
+          <td><%= contract.product_id %></td>
+          <td><%= contract.quantity %></td>
+          <td><%= product.purchase_price %></td>
+          <td><%= contract.selling_price %></td>
+          <td><%= contract.difference_price %></td>
+          <td><%= link_to image_tag("details.png", :class => 'details'), product, :class => 'hrefa' %></td>
+          <td><%= link_to 'Briši', product, :method => :delete, :data => { :confirm => 'Jeste li sigurni da želite izbrisati proizvod?' }, :class => "btn btn-coffee brand brand-back hdr-back" %></td>
+          <td><%= link_to 'Edit', edit_contract_path(contract) %></td>
+        </tr>
+    <% end %>
+  </table>
+
+</div>

@@ -1,0 +1,94 @@
+		<script type="text/javascript">
+			$(function (){
+
+				$('.clients').html('<%= escape_javascript(render("clients/clients")) %>');
+				$('.suppliers').html('<%= escape_javascript(render("suppliers/suppliers")) %>');
+
+				//$('.search-div').hide();
+
+				$('.search-show').click(function() {
+					if ($('.search-div').is(":hidden")) {
+						
+							$('.search-div').slideDown("slow");
+						
+					} else {
+
+						$('.search-div').hide("slow");
+					}
+				});
+
+				/*$(".pagination a").live("click", function() {
+					$(".pagination").html("Učitavanje...");
+					$.getScript(this.href);
+					return false;
+				  });*/
+
+				/*$('.oib').keyup(function () {
+				  $.get($('.oib').attr('action'),
+					$('.oib').serialize(), null, 'script');  
+				  return false;  
+				});*/
+
+				/*$('.client-row').click(function(){
+
+					window.location = 'clients/' + $(this).attr('id');
+					window.location = 'suppliers/' + $(this).attr('id');
+
+				});*/
+
+			})
+
+		</script>
+		<style type="text/css">
+
+			.pagination em {
+
+			  float: left;
+			  padding: 0 14px;
+			  line-height: 34px;
+			  text-decoration: none;
+			  bcontract: 1px solid #ddd;
+			  bcontract-left-width: 0;
+			}
+
+			.pagination span {
+				
+			  float: left;
+			  padding: 0 14px;
+			  line-height: 34px;
+			  text-decoration: none;
+			  bcontract: 1px solid #ddd;
+			  bcontract-left-width: 0;
+			}
+
+		</style>
+	
+		<div class="row-fluid main">
+			<div class="row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<div class="span12">
+							<%= render 'info' %>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row-fluid content">
+				<div class="span12 content-left row-padding">
+					
+					<h2>Klijenti</h2>
+
+					<br />
+						<div class="clients">
+							<%= render 'clients/clients' %>
+						</div>
+					<br />
+					<!-- <h2>Dobavljači</h2>
+					<br />
+						<div class="suppliers">
+							<%#= render 'suppliers/suppliers' %>
+						</div> -->
+				<br />
+				</div>
+			</div>
+		</div>

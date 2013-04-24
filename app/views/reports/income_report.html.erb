@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+				"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html" xml:lang="en" lang="en"  style="background:white;">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<%# wicked_pdf_javascript_include_tag "number_pages" %>
+	<%= wicked_pdf_stylesheet_link_tag "income" %>
+	<%#= wicked_pdf_stylesheet_link_tag "application" %>
+</head>
+<body onload='number_pages' style="background:white;">
+	<div class="container">
+		<div class="row">
+			<div class="span12">
+	
+				<div class="row">
+
+					<div class="span1">
+						<%= wicked_pdf_image_tag "logo-auctus.png", style: "width: 64px;" %>
+						<%#= wicked_pdf_image_tag "logo-auctus.png", style: "width: 60px; margin-top: -10px; margin-right: 20px;" %>
+					</div>
+					<div class="span7">
+						<h2>Auctus grupa d.o.o.</h2>
+					</div>
+					<div class="span4">
+						<ul>
+							<li>OIB: 41827175450</li>
+							<li>Hrvatskog sokola 55, 10000 Zagreb</li>
+							<li>tel:01/6608-777</li>
+							<li>fax:01/6608-999</li>
+						</ul>
+					</div>
+			
+				</div>
+				<br>
+
+				<div class="row">
+					<div class="span12">
+						<table style="width: 900px;">
+						  	<thead>
+								<tr>
+							  		<th>Br. narudžbe</th>
+							  		<th>Ime proizvoda</th>
+							  		<th>Količina</th>
+							  		<th>Cijena</th>
+								</tr>
+						  	</thead>
+						  	<tbody>
+						  		<% @invoices.each do |invoice| %>
+									<tr>
+								  		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								  			<%= invoice.order_id %>
+								  		</td>
+								  		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								  			<%= invoice.product.name %>
+								  		</td>
+								  		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								  			<%= invoice.quantity %>
+								  		</td>
+								  		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								  			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								  			<%= invoice.price %>
+								  		</td>
+									</tr>
+								<% end %>
+								<br />
+								<tr style="border-top:2px solid grey;">
+									<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+									<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+									<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+										Ukupna cijena</td>
+									<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									 <strong><%= @sum %></strong></td>
+								</tr>
+						  	</tbody>
+						</table>				 
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</body>
+</html>

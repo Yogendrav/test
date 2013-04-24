@@ -1,0 +1,50 @@
+<div class="row-fluid">
+    <div class="form-actions">
+        <% if current_user.has_role? :admin %>
+        <%= link_to 'Uredi', edit_client_path(@client), :class => "btn btn-warning btn-edit btn-coffee" %>
+        <%= link_to 'Novi ugovor', new_contract_path(:client => @client), :class => "btn btn-warning btn-edit btn-coffee" %>
+        <% end %>
+    </div> 
+</div>
+<% unless @contracts.blank? %>
+<h2><%= @client.name %> ima sljedeće ugovore: </h2>
+<table class="table">
+	<tr class="th-hide">
+        <th></th>
+		<th>Broj ugovora</th>
+		<!-- <th>Proizvodi</th> -->
+		<th>Količina</th>
+		<th>Prodajna cijena</th>
+		<th></th>
+		<th></th>
+		<th></th>
+		<th></th>
+	</tr>
+	<% @contracts.each do |contract| %>
+		<tr class="client-row ugovori-klijenta" id="<%= contract.id %>">
+            <td class="contract-end-date">
+           <% unless contract.valid_contract.blank? %>
+              <% if !contract.valid_contract %>
+                <td class="vazeci"><span class="label label-important" style="padding: 6px; font-size: 14px;">Ugovor ne vrijedi</span></td>
+              <% else %>
+                <% if contract.contract_end_date < Date.current %>
+                  <td class="vazeci"><span class="label label-warning" style="padding: 6px; font-size: 14px;">Ugovor istekao</span></td>
+                <% else %>
+                    <td class="vazeci"><span class="label label-success" style="padding: 6px; font-size: 14px;">Ugovor vrijedi</span></td>
+                <% end %>
+              <% end %>
+            <% end %>
+            </td>
+
+			<td><%= contract.id %></td>
+			<!-- <td><%#= contract.product.name %></td> -->
+			<td><%= contract.quantity %></td>
+			<td><%= number_with_precision(contract.selling_price, :precision => 2) %></td>
+			<td><%= link_to image_tag("details.png", :class => 'details'), contract, :class => 'hrefa' %></td>
+			<td><%= link_to 'Briši', contract, :method => :delete, :data => { :confirm => 'Jeste li sigurni da želite izbrisati proizvod?' }, :class => "btn btn-coffee brand brand-back hdr-back" %></td>
+		</tr>
+      <% end %>
+    <% else %>
+      <h2><%= @client.name %> nema ugovora </h2>
+	<% end %>
+</table>

@@ -1,0 +1,25 @@
+<table class="table">
+	<tr class="th-hide">
+		<th><%= sort_link @search, :product_code, 'Šifra proizvoda' %></th>
+		<th><%= sort_link @search, :name, 'Naziv proizvoda' %></th>
+		<th>Opis proizvoda</th>
+		<th><%= sort_link @search, :purchase_price, 'Nabavna cijena' %></th>
+		<th></th>
+		<th></th>
+	</tr>
+	<% @products.each do |product| %>
+		<tr class="client-row" id="<%= product.id %>">
+			<td><%= product.product_code %></td>
+			<td><%= product.name %></td>
+			<td><%= product.description %></td>
+			<td><%= number_with_precision(product.purchase_price, :precision => 2) %></td>
+			<td><%= link_to image_tag("details.png", :class => 'details'), edit_product_path(product), :class => 'hrefa' %></td>
+			<td><%= link_to 'Briši', product, :method => :delete, :data => { :confirm => 'Jeste li sigurni da želite izbrisati proizvod?' }, :class => "btn btn-coffee brand brand-back hdr-back" %></td>
+		</tr>
+	<% end %>
+</table>
+<div>
+	<%= will_paginate @products %>
+</div>
+<br />
+	

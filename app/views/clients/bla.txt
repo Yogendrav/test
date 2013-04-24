@@ -1,0 +1,24 @@
+			<div class="span2">
+				<fieldset>
+					<div class="control-group">
+						<%= f.label :dop_gte, "Godine od", :class => "control-label" %>
+						<div class="controls">
+							<%= f.text_field :dop_gte, :class => "input-xlarge", :maxlength => 4 %>
+						</div>
+					</div>
+				</fieldset>
+			</div>
+			<div class="span2">
+				<fieldset>
+					<div class="control-group">
+						<%= f.label :dop_lte, "do", :class => "control-label" %>
+						<div class="controls">
+							<%= f.text_field :dop_lte, :class => "input-xlarge", :maxlength => 4 %>
+						</div>
+					</div>
+				</fieldset>
+			</div>
+
+
+
+			//= require jquery-ui

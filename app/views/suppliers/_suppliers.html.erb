@@ -1,0 +1,23 @@
+<table class="table">
+	<tr class="th-hide">
+		<th><%= sort_link @search, :oib %></th>
+		<th><%= sort_link @search, :name, 'Ime' %></th>
+		<th></th>
+		<th>Detalji</th>
+		<th></th>
+	</tr>
+	<% @suppliers.each do |supplier| %>
+		<tr class="client-row" id="<%= supplier.id %>">
+			<td><%= supplier.oib %></td>
+			<td><%= supplier.name %></td>
+			<td><%= supplier.comment %></td>
+			<td><%= link_to image_tag("details.png", :class => 'details'), supplier, :class => 'hrefa' %></td>
+			<td><%= link_to 'Briši', supplier, :method => :delete, :data => { :confirm => 'Jeste li sigurni da želite izbrisati stranku?' }, :class => "btn btn-coffee brand brand-back hdr-back" %></td>
+		</tr>
+	<% end %>
+</table>
+<div>
+	<%= will_paginate @suppliers, :param_name => 'supplier_page' %>
+</div>
+<br />
+	

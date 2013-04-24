@@ -1,0 +1,8 @@
+<% @sanitations.each  do |sanitation| %>
+    <%= sanitation.id %>
+    <%= sanitation.client.name %>
+    <%= sanitation.client.addresses.map(&:ulica)[0] %>
+    <%= sanitation.client.addresses.map(&:mjesto)[0] %>
+    <%= sanitation.last_sanitation_date %>
+
+<% end %>

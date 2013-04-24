@@ -1,0 +1,58 @@
+<script>
+  $(function(){
+      $('.filter-contracts').change(function(){
+          var product_id = $(this).val();
+          window.location.href = '/contracts?filter_product_id='+ product_id +'';
+      });
+  })
+</script>
+<div class="row-fluid main">
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="row-fluid">
+                <div class="span12">
+                    <div class="row-fluid">
+                        <div class="span9">
+                            <%= render 'search' if current_page?('/contracts') %>
+                        </div>
+                        <div class="span1">
+                            <div class="stats_overview stats_next">
+                                <div class="overview_today">
+                                    <p class="overview_day">ukupno</p>
+                                    <p class="overview_day"><%= @contracts.count rescue nil %></p> <!-- TREBA BIT VEĆE -->
+                                    <p class="overview_type">ugovora za <%= @contracts.first.product.name rescue nil %></p>
+                                </div>
+                            </div>
+                        </div>
+
+
+                      <div class="span1">
+                        <div class="stats_overview stats_next">
+                          <div class="overview_today">
+                            <p class="overview_day">ukupno</p>
+                            <p class="overview_day"><%= @info %></p> <!-- TREBA BIT VEĆE -->
+                            <p class="overview_type">ugovora</p>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid content">
+        <div class="span12 content-left row-padding">
+            
+          <h2>Ugovori</h2><%= select("post", "product_id", Product.all.collect {|p| [ p.name, p.id ] }, {:include_blank => 'Odaberite proizvod...'}, { :class => 'input-xlarge frm-clients filter-contracts' }) %> <%= link_to "Očisti" ,contracts_path %>
+            <br />
+                <div class="contracts">
+                    <%= render 'contracts' %>
+                </div>
+        <br />
+        </div>
+        <div class="span4">
+        </div>
+
+    </div>
+</div>

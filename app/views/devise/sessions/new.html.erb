@@ -1,0 +1,48 @@
+
+<div class="row-fluid">
+	<div class="row-fluid content">
+		<div class="span12 content-left">
+			
+				<div class="span4">
+
+				</div>
+				
+				<div class="span4">
+					<fieldset>
+						<%= form_for(resource, :as => resource_name, :url => session_path(resource_name), 
+						:html => { :class => 'well form-horizontal clearfix'}) do |f| %>
+						<div class="control-group">
+							<%= f.label :username, 'Korisničko ime:', :class => "control-label" %>
+							<div class="controls">
+								<%= f.text_field :username, :class => "input-xlarge" %>
+							</div>
+						</div>
+						<div class="control-group">
+							<%= f.label :password, 'Lozinka:', :class => "control-label" %>
+							<div class="controls">
+								<%= f.password_field :password, :class => "input-xlarge" %>
+							</div>
+						</div>
+						<div class="control-group">	
+							<div class="controls">
+						    	<% if devise_mapping.rememberable? -%>
+						    		<label class="checkbox">Zapamti me
+							    	<%= f.check_box :remember_me %>
+							    	</label>
+							    <% end -%>
+							</div>	
+							<div class="form-actions pull-right">
+								<%= f.submit "Prijava", :class => "btn btn-large btn-primary btn-coffee" %>
+							</div>
+						</div>
+					</fieldset>	
+					<%= render "devise/shared/links" %>
+					<% end %>
+				</div>
+				<div class="span4">
+				</div>
+			</div>
+		</div>
+		
+	</div>
+</div>

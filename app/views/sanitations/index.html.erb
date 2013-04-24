@@ -1,0 +1,77 @@
+<div class="row-fluid main">
+   <!-- <div class="row-fluid">
+        <div class="span12">
+            <div class="row-fluid">
+                <div class="span12">
+                    <div class="row-fluid">
+                        <div class="span8">
+                            <%#= render 'search' if current_page?('/orders') %>
+                        </div>
+                        <div class="span4">
+                            <div class="stats_overview stats_next">
+                                <div class="overview_today">
+                                    <p class="overview_day">ukupno</p>
+                                    <p class="overview_day"><%= @info %></p> &lt;!&ndash; TREBA BIT VEĆE &ndash;&gt;
+                                    <p class="overview_type">narudžbi</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>-->
+    <div class="row-fluid content">
+        <div class="span12 content-left row-padding">
+        </div>
+        <div class="row-fluid">
+            <div class="span2"><h2>Sanitacije</h2></div>
+            <div class="span8"><br><%= link_to 'Nova sanitacija', new_sanitation_path, :class => "btn btn-info" %></div>
+        </div>
+        
+        
+               
+          </br></br></br>
+                <div class="clients">
+                    <table class="table">
+
+                        <tr class="th-hide">
+                            <th>Datum početka</th>
+                            <th>Datum kraja</th>
+                            <th>Klijent</th>
+                            <th>Adresa</th>
+                            <th>Proizvod</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+
+                    <% unless @sanitations.nil? %>
+
+                        <% @sanitations.each do |sanitation| %>
+                            <tr>
+                                <td><%= sanitation.start_date rescue nil  %></td>
+                                <td><%= sanitation.end_date rescue nil  %></td>
+                                <td><%= sanitation.client.name rescue nil %></td>
+                                <td><%= sanitation.client.addresses.map(&:ulica)[0] rescue nil %> <%= sanitation.client.addresses.map(&:mjesto)[0] rescue nil %></td>
+                                <td><%= sanitation.product.name rescue nil %></td>
+                                <td><%= link_to image_tag("details.png", :class => 'details'), edit_sanitation_path(sanitation) %></td>
+                                <td><%= link_to 'Briši', sanitation, :method => :delete, :data => { :confirm => 'Jeste li sigurni da želite izbrisati sanitaciju?' }, :class => "btn btn-coffee brand brand-back hdr-back" %></td>
+                             </tr>
+                         <% end %>
+                    <% else %>
+                        Nema sanitacija
+                    <% end %>
+                    </table>
+                    <div>
+                    </div>
+                    <br>
+                </div>  
+        <br />
+        </div>
+
+        <div class="span4">
+        </div>
+
+    </div>
+</div>

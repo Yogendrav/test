@@ -1,0 +1,93 @@
+
+<% if flash[:notice] -%>
+    <br />
+    <div class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <strong>Uspješno</strong> ste dodali novog dobavljača!
+    </div>
+<% end %>
+
+	<div class="row-fluid content">
+		<div class="span12 content-left row-padding">
+			<h2>Podaci o dobavljaču - <%= @supplier.name %></h2>
+			<div class="row-fluid">
+				<div class="span12 well">
+					<div class="span3">
+						<dl class="dl-horizontal">
+							<div class="well well-small well-show">
+								<dt>OIB:</dt>
+								<dd><%= @supplier.oib %></dd>
+							</div>
+							<div class="well well-small well-show">
+								<dt>Ime:</dt>
+								<% if @supplier.name %>
+                                    <dd><%= @supplier.name %></dd>
+								<% else %>
+                                    <dd>N/A</dd>
+								<% end %>
+							</div>
+						</dl>
+					</div>
+					<div class="span4">
+						<dl class="dl-horizontal">
+							<div class="well well-small well-show">
+								<dt>E-mail:</dt>
+								<% for email in @supplier.emails %>  
+									<% if email.email %>
+										<dd>
+											<%= email.email %>
+										</dd>
+									<% else %>
+										<dd>N/A</dd>
+									<% end %>
+								<% end %>
+							</div>
+							<div class="well well-small well-show">
+								<dt>Komentar:</dt>
+								<% if @supplier.comment %>
+									<dd><%= @supplier.comment %></dd>
+								<% end %>
+							</div>
+						</dl>
+					</div>
+					<div class="span4">
+						<dl class="dl-horizontal">
+							<div class="well well-small well-show">
+								<dt>Adresa:</dt>
+								<% for address in @supplier.addresses %>  
+									<% if address.ulica %>
+										<dd>
+											<%= address.ulica %>
+											<%= address.pbroj %>
+											<%= address.mjesto %>
+										</dd>
+									<% else %>
+										<dd>N/A</dd>
+									<% end %>
+								<% end %>
+							</div>
+							<div class="well well-small well-show">
+								<dt>Telefon:</dt> 
+								<% for phone in @supplier.phones %>  
+									<% if phone.number %>
+										<dd>
+											<%= phone.number %>
+											<% if 1 == phone.type_phone %>
+												Mobilni
+											<% elsif 2 == phone.type_phone %>
+												Fiksni
+											<% end %>
+										</dd>
+									<% else %>
+										<dd>N/A</dd>
+									<% end %>
+								<% end %>
+							</div>
+						</dl>
+					</div>
+				</div>
+			</div>
+
+			<%= render 'products/list' %>
+	</div>
+

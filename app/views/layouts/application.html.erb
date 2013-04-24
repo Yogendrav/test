@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Puzzle - Auctus Grupa</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="Puzzle - Baza klijenata" />
+		<meta name="keywords" content="puzzle, Puzzle, baza klijenata, Baza klijenata" />
+		<meta name = "viewport" content = "initial-scale = 1.0, user-scalable = no">
+
+
+		<%= stylesheet_link_tag "application" %>
+		<%= javascript_include_tag "application" %>
+        <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/themes/base/jquery-ui.css" media="screen" />
+		<%= csrf_meta_tag %>
+</head>
+<body>
+	<div class="container-fluid">
+			<div class="row-fluid">
+					<div class="span12">
+						
+						<%= render 'layouts/navigation' %>
+
+						<%= yield %>
+
+					</div>
+			</div>
+	</div>
+</body>
+</html>
+	
+
+

@@ -1,0 +1,40 @@
+<script>
+  $(function(){
+      for(i=0;i<3600;i++) {
+          $('.sanitation').effect("highlight", { color: "#f07635" }, 1000);
+      }
+  })
+
+</script>
+<div class="span11">
+	<div class="stats_overview stats_next">
+		<div class="overview_today">
+			<p class="overview_day">ukupno</p>
+			<p class="overview_day"><%= @info_not_valid %></p>
+			<p class="overview_type">ugovora nije odobreno</p>
+		</div>
+	</div>
+	<div class="stats_overview stats_next">
+		<div class="overview_today">
+			<p class="overview_day">ukupno</p>
+			<p class="overview_day"><%= @info_expired  %></p>
+			<p class="overview_type">ugovora isteklo</p>
+		</div>
+	</div>
+	<!-- <div class="stats_overview stats_next">
+		<div class="overview_today">
+			<p class="overview_day">ukupno</p>
+			<p class="overview_day"><%= @info_su %></p>
+			<p class="overview_type">dobavljača</p>
+		</div>
+	</div> -->
+    <%= link_to :expired_sanitations do %>
+	<div class="stats_overview stats_next sanitation">
+		<div class="overview_today">
+			<p class="overview_day">ukupno</p>
+			<p class="overview_day"><%= @info_sanitation %></p>
+			<p class="overview_type">sanitacija isteklo</p>
+		</div>
+	</div>
+  <% end unless @info_sanitation = 0 %>
+</div>

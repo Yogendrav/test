@@ -1,0 +1,114 @@
+<script>
+    $(function(){
+
+        $('#sanitation_client_id').change(function(){
+
+            var client_id = $(this).val();
+            $('#sanitation_address_id').html("");
+            $.ajax({
+                url: '/get_client_address',
+                type: 'POST',
+                dataType: 'json',
+                data: {"client_id" : client_id },
+                success: function(data) {
+
+                    if(data == ""){
+                        $('#sanitation_address_id').html("Klijent nema adresu...");
+                    } else {
+                        $.each(data, function(i){
+                            $('#sanitation_address_id').append('<option value="'+ data[i].id +'">'+ data[i].ulica + ' ' + data[i].mjesto + '</option>');
+                        });
+                    }
+                    $('.choose-address').show();
+                }
+
+            });
+
+        });
+    })
+</script>
+<%= nested_form_for @sanitation, :url => { :action => "update" }, :html => { :class => 'well form-horizontal clearfix'} do |f| %>
+    <% if @sanitation.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@sanitation.errors.count, "error") %> prohibited this sanitation from being saved:</h2>
+
+          <ul>
+            <% @sanitation.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="span5">
+      <fieldset>
+        <span class="state-buttons">
+            <%= render partial: "sanitation_valid" %>
+        </span>
+        </br>  </br></br>
+
+        <div class="control-group field">
+          <%= f.label :contract_id, 'Broj vezanog ugovora', :class => "control-label" %>
+          <div class="controls">
+            <%= f.collection_select :contract_id, Contract.where(client_id: @sanitation.client.id).all, :id, :contract_number, {selected: @sanitation.client.contracts.map(&:id)[0] }, { :class => 'input-xlarge frm-clients' } %>
+          </div>
+        </div>
+
+        <div class="control-group field">
+          <%= f.label :start_date, 'Datum početka', :class => "control-label" %>
+          <div class="controls">
+            <%= f.datepicker 'start_date', :class => "input-xlarge frm-clients sanitation-start-date", dateFormat: "yy-mm-dd", changeMonth: true, changeYear: true, clearText:"izbriši",clearStatus:"Izbriši trenutni datum",closeText:"Zatvori",closeStatus:"Zatvori kalendar",prevText:"&#x3c;",prevStatus:"Prikaži prethodni mjesec",prevBigText:"&#x3c;&#x3c;",prevBigStatus:"",nextText:"&#x3e;",nextStatus:"Prikaži slijedeći mjesec",nextBigText:"&#x3e;&#x3e;",nextBigStatus:"",currentText:"Danas",currentStatus:"Današnji datum",monthNames:["Siječanj","Veljača","Ožujak","Travanj","Svibanj","Lipani","Srpanj","Kolovoz","Rujan","Listopad","Studeni","Prosinac"],monthNamesShort:["Sij","Velj","Ožu","Tra","Svi","Lip","Srp","Kol","Ruj","Lis","Stu","Pro"],monthStatus:"Prikaži mjesece",yearStatus:"Prikaži godine",weekHeader:"Tje",weekStatus:"Tjedan",dayNames:["Nedjalja","Ponedjeljak","Utorak","Srijeda","Četvrtak","Petak","Subota"],dayNamesShort:["Ned","Pon","Uto","Sri","Čet","Pet","Sub"],dayNamesMin:["Ne","Po","Ut","Sr","Če","Pe","Su"],dayStatus:"Odaber DD za prvi dan tjedna",dateStatus:"'Datum' D, M d",firstDay:1,initStatus:"Odaberi datum",isRTL:false  %> <!-- ,dateFormat:"dd.mm.yy." -->
+          </div>
+        </div>
+
+        <div class="control-group field">
+          <%= f.label :end_date, 'Datum isteka', :class => "control-label" %>
+          <div class="controls">
+            <%= f.datepicker 'end_date', :class => "input-xlarge frm-clients", dateFormat: "yy-mm-dd", changeMonth: true, changeYear: true, clearText:"izbriši",clearStatus:"Izbriši trenutni datum",closeText:"Zatvori",closeStatus:"Zatvori kalendar",prevText:"&#x3c;",prevStatus:"Prikaži prethodni mjesec",prevBigText:"&#x3c;&#x3c;",prevBigStatus:"",nextText:"&#x3e;",nextStatus:"Prikaži slijedeći mjesec",nextBigText:"&#x3e;&#x3e;",nextBigStatus:"",currentText:"Danas",currentStatus:"Današnji datum",monthNames:["Siječanj","Veljača","Ožujak","Travanj","Svibanj","Lipani","Srpanj","Kolovoz","Rujan","Listopad","Studeni","Prosinac"],monthNamesShort:["Sij","Velj","Ožu","Tra","Svi","Lip","Srp","Kol","Ruj","Lis","Stu","Pro"],monthStatus:"Prikaži mjesece",yearStatus:"Prikaži godine",weekHeader:"Tje",weekStatus:"Tjedan",dayNames:["Nedjalja","Ponedjeljak","Utorak","Srijeda","Četvrtak","Petak","Subota"],dayNamesShort:["Ned","Pon","Uto","Sri","Čet","Pet","Sub"],dayNamesMin:["Ne","Po","Ut","Sr","Če","Pe","Su"],dayStatus:"Odaber DD za prvi dan tjedna",dateStatus:"'Datum' D, M d",firstDay:1,initStatus:"Odaberi datum",isRTL:false  %> <!-- ,dateFormat:"dd.mm.yy."-->
+          </div>
+        </div>
+
+        <div class="control-group field">
+          <%= f.label :client_id, 'Klijent', :class => "control-label" %>
+          <div class="controls">
+            <%= f.collection_select :client_id, Client.all, :id, :name, {:include_blank => 'Odaberite klijenta...'}, { :class => 'input-xlarge frm-clients' } %>
+          </div>
+        </div>
+        <div class="control-group field choose-address">
+          <%= f.label :address_id, 'Odaberite adresu', :class => "control-label" %>
+          <div class="controls">
+            <%= f.collection_select :address_id, Address.where(client_id: @sanitation.client.id).all, :id, :ulica_i_mjesto  , { selected: @sanitation.client.addresses.map(&:id)[0] }, { :class => 'input-xlarge frm-clients' } %>
+          </div>
+
+        </div>
+
+        <div class="control-group field">
+          <%= f.label :product_id, 'Proizvod', :class => "control-label" %>
+          <div class="controls">
+            <%= f.collection_select :product_id, Product.where("name not like '%voda%' AND name not like '%kava%'" ), :id, :name, {:include_blank => 'Odaberite proizvod...'}, { :class => 'input-xlarge frm-clients proizvod' } %>
+          </div>
+        </div>
+
+        <div class="control-group field">
+          <%= f.hidden_field :last_sanitation_date, :class => "sanitation-last-date" %>
+        </div>
+
+        <div class="control-group field">
+          <%= f.label :sanitation_price, 'Cijena sanitacije', :class => "control-label" %>
+          <div class="controls">
+            <%= f.text_field :sanitation_price, :class => 'input-xlarge frm-clients' %>
+          </div>
+        </div>
+
+        <div class="control-group field">
+          <%= f.label :device_quantity, 'Količina', :class => "control-label" %>
+          <div class="controls">
+            <%= f.number_field :device_quantity, min: "1", :class => 'input-xlarge frm-clients' %>
+          </div>
+        </div>
+        <div class="form-actions">
+          <%= f.submit "Dodaj sanitaciju", :class => "btn btn-large btn-primary btn-custom btn-coffee" %>
+        </div>
+      </fieldset>
+    </div>
+<% end %>

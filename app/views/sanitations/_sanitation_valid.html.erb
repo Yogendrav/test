@@ -1,0 +1,5 @@
+<% if @sanitation_count.to_i < 1 %>
+    Ističe za: <%= 90 - (DateTime.now.to_date.day - @sanitation.last_sanitation_date.to_date.day) %> dana
+<% else %>
+    <%=  link_to "Produži ugovor", sanitation_valid_path(id: @sanitation_valid.map(&:id)[0], date: @sanitation_valid.map(&:last_sanitation_date)[0]), remote: true, id: "sanitation-true", class: "btn btn-large btn-success state-sanitation" %>
+<% end %>

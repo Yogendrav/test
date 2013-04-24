@@ -1,0 +1,45 @@
+        <script type="text/javascript">
+            $(function (){
+
+                $('.client-row').click(function(){
+
+                    window.location = 'users/' + $(this).attr('id');
+
+                });
+            })
+        </script>
+        <div class="row-fluid main">
+            <div class="row-fluid content">
+                <div class="span12 content-left">
+                    <h2>Suradnici</h2>
+                    <br />
+                   <table class="table">
+                       <tr>
+                        <th>Korisničko ime</th>
+                        <th>Ime</th>
+                        <th>Prezime</th>
+                        <% if current_user.has_role? :admin %>
+                            <th></th>
+                            <th></th>
+                        <% end %>
+                      </tr>
+
+                    <% @users.each do |user| %>
+                      <tr class="client-row" id="<%= user.id %>">
+                        <td><%= user.username %></td>
+                        <td><%= user.name %></td>
+                        <td><%= user.surname %></td>
+                        <% if current_user.has_role? :admin %>
+                            <td><%= link_to image_tag("details.png", :class => 'details'), edit_user_path(user), :class => 'hrefa' %></td>
+                            <td><%= link_to 'Briši', user, :method => :delete, :data => { :confirm => 'Jeste li sigurni da želite izbrisati suradnika?' }, :class => "btn btn-warning brand brand-back hdr-back" %></td>
+                        <% end %>
+                      </tr>
+                    <% end %>
+                    </table>
+
+                    <br />
+                </div>
+                <div class="span4">
+                </div>
+            </div>
+        </div>

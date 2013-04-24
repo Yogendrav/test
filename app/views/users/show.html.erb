@@ -1,0 +1,68 @@
+
+<% if flash[:notice] -%>
+    <br />
+    <div class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <strong>Uspješno</strong> ste dodali novog suradnika!
+    </div>
+<% end -%>
+
+	<div class="row-fluid content">
+		<div class="span12 content-left">
+			<h2>Podaci o suradniku</h2>
+			<div class="row-fluid">
+                <div class="span12 well">
+    				<div class="span4">
+    					<dl class="dl-horizontal">
+                            <div class="well well-small well-show">
+        						<dt>Ime:</dt>
+        						<% if @user.name %>
+        							<dd><%= @user.name %></dd>
+        						<% else %>
+        							<dd>N/A</dd>
+        						<% end %>
+                            </div>
+                            <div class="well well-small well-show">
+        						<dt>Prezime:</dt>
+        						<% if @user.surname %>
+        							<dd><%= @user.surname %></dd>
+        						<% else %>
+        							<dd>N/A</dd>
+        						<% end %>
+                            </div>
+    					</dl>
+    				</div>
+    				<div class="span4">
+    					<dl class="dl-horizontal">
+                            <div class="well well-small well-show">
+        						<dt>Telefon:</dt> 
+        						<% for user_phone in @user.user_phones %>  
+        							<% if user_phone.number %>
+        								<dd>
+        									<%= user_phone.number %>
+        									<% if 1 == user_phone.type_phone %>
+        										Mobilni
+        									<% elsif 2 == user_phone.type_phone %>
+        										Fiksni
+        									<% end %>
+        								</dd>
+        							<% else %>
+        								<dd>N/A</dd>
+        							<% end %>
+        						<% end %>
+                            </div>
+    					</dl>
+    				</div>
+                </div>
+                <div class="row-fluid">
+                <div class="form-actions">
+                    <% if current_user.has_role? :admin %>
+                    <%= link_to 'Uredi', edit_user_path(@user), :class => "btn btn-warning btn-edit" %>
+                    <% end %>
+                </div> 
+            </div>
+			</div>
+		</div>
+    </div>
+		 
+

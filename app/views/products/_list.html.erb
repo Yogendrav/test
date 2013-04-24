@@ -1,0 +1,29 @@
+<div class="row-fluid">
+    <div class="form-actions">
+        <% if current_user.has_role? :admin %>
+        <%= link_to 'Uredi', edit_supplier_path(@supplier), :class => "btn btn-warning btn-edit btn-coffee" %>
+        <%= link_to 'Novi proizvod', new_product_path(:supplier => @supplier), :class => "btn btn-warning btn-edit btn-coffee" %>
+        <% end %>
+    </div> 
+</div>
+<h2><%= @supplier.name %> proizvodi sljedeće: </h2>
+<table class="table">
+	<tr class="th-hide">
+		<th>Šifra proizvoda</th>
+		<th>Naziv proizvoda</th>
+		<th>Opis proizvoda</th>
+		<th>Nabavna cijena</th>
+		<th></th>
+		<th></th>
+	</tr>
+	<% @products.each do |product| %>
+		<tr class="client-row" id="<%= product.id %>">
+			<td><%= product.product_code %></td>
+			<td><%= product.name %></td>
+			<td><%= product.description %></td>
+			<td><%= product.purchase_price %></td>
+			<td><%= link_to image_tag("details.png", :class => 'details'), product, :class => 'hrefa' %></td>
+			<td><%= link_to 'Briši', product, :method => :delete, :data => { :confirm => 'Jeste li sigurni da želite izbrisati stranku?' }, :class => "btn btn-coffee brand brand-back hdr-back" %></td>
+		</tr>
+	<% end %>
+</table>

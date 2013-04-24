@@ -1,0 +1,68 @@
+<%= form_for @product, :url => { :action => "create" }, :html => { :class => 'well form-horizontal clearfix'} do |f| %>
+	<% if @product.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+			<ul>
+			<% @product.errors.full_messages.each do |msg| %>
+				<li><%= msg %></li>
+			<% end %>
+			</ul>
+		</div>
+	<% end %>
+<div class="span5">
+	<fieldset>
+		<!-- <div class="control-group">
+	      <%#= f.label :supplier_id, 'Dobavljač', :class => "control-label" %>
+	      <div class="controls"> 
+	        <%#= f.collection_select :supplier_id, Supplier.all, :id, :name, {:selected => params[:supplier]}, :class => 'input-xlarge frm-clients' %>
+	      </div>
+	    </div> -->
+		<div class="control-group">
+			<%= f.label :product_code, 'Šifra proizvoda', :class => "control-label" %>
+			<div class="controls"> 
+				<%= f.text_field :product_code, :class => "input-xlarge frm-clients", :placeholder => "Šifra proizvoda..." %>
+			</div>
+		</div>
+		<div class="control-group">
+			<%= f.label :name, 'Ime proizvoda', :class => "control-label" %>
+			<div class="controls"> 
+				<%= f.text_field :name, :class => "input-xlarge frm-clients", :placeholder => "Ime proizvoda..." %>
+			</div>
+		</div>
+          <div class="control-group">
+            <%= f.label :producttype_id, 'Tip proizvoda', :class => "control-label" %>
+            <div class="controls">
+              <%= f.collection_select :producttype_id, Producttype.all, :id, :name, { :class => 'input-xlarge frm-clients' } %>
+            </div>
+          </div>
+		<div class="control-group">
+			<%= f.label :purchase_price, 'Nabavna cijena', :class => "control-label" %>
+			<div class="controls"> 
+				<%= f.text_field :purchase_price, :class => "input-xlarge frm-clients", :placeholder => "Nabavna cijena..." %>
+			</div>
+		</div>
+          <div class="control-group">
+            <%= f.label :price_percentage, 'Postotak zarade (Auctus zarada)', :class => "control-label" %>
+            <div class="controls">
+              <%= f.text_field :price_percentage, :class => "input-xlarge frm-clients", :placeholder => "Postotak zarade (Auctus zarada)..." %>
+            </div>
+          </div>
+		<div class="control-group">
+			<%= f.label :description, 'Opis proizvoda', :class => "control-label" %>
+			<div class="controls"> 
+				<%= f.text_area :description, :rows =>6, :cols => 32, :maxlength =>250, :class => "input-xlarge frm-clients", :placeholder => "Opis proizvoda..." %>
+			</div>
+		</div>
+		<%= f.hidden_field :user_id,  :value => current_user.id %>
+		<div class="form-actions">
+			<%= f.submit "Dodaj proizvod", :class => "btn btn-large btn-primary btn-custom btn-coffee" %>
+		</div>
+	</fieldset>
+</div>
+<div class="span5">
+	<fieldset>
+		
+	</fieldset>
+</div>
+<% end %>

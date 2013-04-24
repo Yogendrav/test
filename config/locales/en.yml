@@ -1,0 +1,64 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+  hello: "Hello world"
+en:  
+  activerecord:
+    models: 
+      client: "Klijent"
+    attributes:
+      client: 
+        jmbg: JMBG
+        name: Ime
+        oib: OIB
+        surname: Prezime
+        title: Titula
+        dop: "Datum rođenja"
+        addresses: "Adresa"
+        emails: "E-mail"
+        phones: "Telefon"
+    errors: 
+      models: 
+        client: 
+          attributes: 
+            addresses: 
+              blank: "nije unesena."
+            dop: 
+              blank: "nije unesen."
+            emails: 
+              blank: "nije unesen."
+            jmbg: 
+              blank: "nije unesen."
+            name: 
+              blank: "nije uneseno."
+            oib: 
+              blank: "nije unesen."
+            phones: 
+              blank: "nije unesen."
+            surname: 
+              blank: "nije uneseno."
+            title: 
+              blank: "nije unesena."
+      user: "Korisnik"
+    attributes:
+      user: 
+        name: Ime
+        surname: Prezime
+        username: Korisničko ime
+        password: Lozinka
+        email: "E-mail"
+    errors: 
+      models: 
+        user: 
+          attributes: 
+            name: 
+              blank: "nije uneseno."
+            surname: 
+              blank: "nije uneseno."
+            username: 
+              blank: "nije uneseno."
+            password: 
+              blank: "nije unesena."
+            email: 
+              blank: "nije unesen."

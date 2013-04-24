@@ -1,0 +1,24 @@
+<div class="span12">
+	<div class="search-div search-clients">
+		<%= form_for @search, :url => contracts_path, :html => {:method => :get} do |f| %>
+			<div class="span3">
+				<fieldset>
+					<div class="control-group">
+						<label class="control-label">Pretraži ugovore: </label>
+						<div class="controls">
+							<%= f.text_field :contract_number_contains, :class => "input-xlarge" %>
+						</div>
+					</div>
+				</fieldset>
+			</div>
+			<div class="span1">
+				<fieldset>
+					<div class="control-group">
+						<label>&nbsp;</label>
+						<%= f.submit 'Traži', :class => "btn btn-primary btn-coffee" %>
+					</div>
+				</fieldset>
+			</div>
+		<% end %>
+	</div>
+</div>

@@ -1,0 +1,177 @@
+<script type="text/javascript">
+    $(function (){
+
+        mjeseciHTML = '<select class="input-medium report-months"><option value="1">Siječanj</option><option value="2">Veljača</option><option value="3">Ožujak</option><option value="4">Travanj</option><option value="5">Svibanj</option><option value="6">Lipanj</option><option value="7">Srpanj</option><option value="8">Kolovoz</option><option value="9">Rujan</option><option value="10">Listopad</option><option value="11">Studeni</option><option value="12">Prosinac</option></select>';
+        godineHTML = '<select class="input-medium report-year"><option value="2011">2011</option><option value="2012">2012</option><option value="2013">2013</option><option value="2014">2014</option><option value="2015">2015</option><option value="2016">2016</option><option value="2017">2017</option><option value="2018">2018</option><option value="2019">2019</option><option value="2020">2020</option></select>';
+
+        quarteryearHTML = '<select class="input-medium report-quarteryear"><option value="1">Prvi kvartal</option><option value="2">Drugi kvartal</option><option value="3">Treći kvartal</option><option value="4">Četvrti kvartal</option></select>';
+        halfyearHTML = '<select class="input-medium report-halfyear"><option value="1">Prva polovica</option><option value="2">Druga polovica</option></select>';
+
+
+        $('.report-options').change(function(){
+            if($(this).val() == 1){
+                $('.report-filters').html(mjeseciHTML + godineHTML);
+
+                $('.generate-report').attr('href','../client/income_report.pdf?id=' + $('.user-id-stats').val() + '&month=' + $('.report-months option:selected').val() + '&year=' + $('.report-year option:selected').val() + '');
+
+                $('.report-months').change(function() {
+                    $('.generate-report').attr('href','../client/income_report.pdf?id=' + $('.user-id-stats').val() + '&month=' + $('.report-months option:selected').val() + '&year=' + $('.report-year option:selected').val() + '');
+                });
+
+                $('.report-year').change(function() {
+                    $('.generate-report').attr('href','../client/income_report.pdf?id=' + $('.user-id-stats').val() + '&month=' + $('.report-months option:selected').val() + '&year=' + $('.report-year option:selected').val() + '');
+                });
+
+            } else if($(this).val() == 2) {
+                $('.report-filters').html(quarteryearHTML + godineHTML);
+
+                $('.generate-report').attr('href','../client/income_report.pdf?id=' + $('.user-id-stats').val() + '&quarter=' + $('.report-quarteryear option:selected').val() + '&year=' + $('.report-year option:selected').val() + '');
+
+                $('.report-months').change(function() {
+                    $('.generate-report').attr('href','../client/income_report.pdf?id=' + $('.user-id-stats').val() + '&quarter=' + $('.report-quarteryear option:selected').val() + '&year=' + $('.report-year option:selected').val() + '');
+                });
+
+                $('.report-year').change(function() {
+                    $('.generate-report').attr('href','../client/income_report.pdf?id=' + $('.user-id-stats').val() + '&quarter=' + $('.report-quarteryear option:selected').val() + '&year=' + $('.report-year option:selected').val() + '');
+                });
+
+            } else if($(this).val() == 3) {
+                $('.report-filters').html(halfyearHTML + godineHTML);
+
+                $('.generate-report').attr('href','../client/income_report.pdf?id=' + $('.user-id-stats').val() + '&half=' + $('.report-halfyear option:selected').val() + '&year=' + $('.report-year option:selected').val() + '');
+
+                $('.report-months').change(function() {
+                    $('.generate-report').attr('href','../client/income_report.pdf?id=' + $('.user-id-stats').val() + '&half=' + $('.report-halfyear option:selected').val() + '&year=' + $('.report-year option:selected').val() + '');
+                });
+
+                $('.report-year').change(function() {
+                    $('.generate-report').attr('href','../client/income_report.pdf?id=' + $('.user-id-stats').val() + '&half=' + $('.report-halfyear option:selected').val() + '&year=' + $('.report-year option:selected').val() + '');
+                });
+
+            } else if($(this).val() == 4) {
+                $('.report-filters').html(godineHTML);
+
+                $('.generate-report').attr('href','../client/income_report.pdf?id=' + $('.user-id-stats').val() + '&year=' + $('.report-year option:selected').val() + '');
+
+                $('.report-months').change(function() {
+                    $('.generate-report').attr('href','../client/income_report.pdf?id=' + $('.user-id-stats').val() + '&year=' + $('.report-year option:selected').val() + '');
+                });
+
+                $('.report-year').change(function() {
+                    $('.generate-report').attr('href','../client/income_report.pdf?id=' + $('.user-id-stats').val() + '&year=' + $('.report-year option:selected').val() + '');
+                });
+            }
+        });
+    })
+
+</script>
+<% if flash[:notice] -%>
+    <br />
+    <div class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <strong>Uspješno</strong> ste dodali novu stranku!
+    </div>
+<% end %>
+
+	<div class="row-fluid content">
+		<div class="span12 content-left row-padding">
+			<h2>Podaci o klijentu - <%= @client.name %></h2>
+			<div class="row-fluid">
+				<div class="span2">
+					<select class="input-medium report-options">
+			            <option value="0">Odaberite vrijeme...</option>
+			            <option value="1">Mjesečno</option>
+			            <option value="2">Kvartalno</option>
+			            <option value="3">Polugodišnje</option>
+			            <option value="4">Godišnje</option>
+			        </select>
+				</div>
+				<div class="span8 pull-left">
+					<div class="report-filters"></div>
+          			<a href="" class="generate-report btn btn-danger">Report</a>
+				</div>
+			</div>
+          
+          
+          <%= hidden_field_tag "user_id", params[:id], class: "user-id-stats" %>
+			<div class="row-fluid">
+				<div class="span12 well">
+					<div class="span3">
+						<dl class="dl-horizontal">
+							<div class="well well-small well-show">
+								<dt>OIB:</dt>
+								<dd><%= @client.oib %></dd>
+							</div>
+							<div class="well well-small well-show">
+								<dt>Ime:</dt>
+								<% if @client.name %>
+                                    <dd><%= @client.name %></dd>
+								<% else %>
+                                    <dd>N/A</dd>
+								<% end %>
+							</div>
+						</dl>
+					</div>
+					<div class="span4">
+						<dl class="dl-horizontal">
+							<div class="well well-small well-show">
+								<dt>E-mail:</dt>
+								<% for email in @client.emails %>  
+									<% if email.email %>
+										<dd>
+											<%= email.email %>
+										</dd>
+									<% else %>
+										<dd>N/A</dd>
+									<% end %>
+								<% end %>
+							</div>
+							<div class="well well-small well-show">
+								<dt>Komentar:</dt>
+								<% if @client.comment %>
+									<dd><%= @client.comment %></dd>
+								<% end %>
+							</div>
+						</dl>
+					</div>
+					<div class="span4">
+						<dl class="dl-horizontal">
+							<div class="well well-small well-show">
+								<dt>Adresa:</dt>
+								<% for address in @client.addresses %>  
+									<% if address.ulica %>
+										<dd>
+											<%= address.ulica %>
+											<%= address.pbroj %>
+											<%= address.mjesto %>
+										</dd>
+									<% else %>
+										<dd>N/A</dd>
+									<% end %>
+								<% end %>
+							</div>
+							<div class="well well-small well-show">
+								<dt>Telefon:</dt> 
+								<% for phone in @client.phones %>  
+									<% if phone.number %>
+										<dd>
+											<%= phone.number %>
+											<% if 1 == phone.type_phone %>
+												Mobilni
+											<% elsif 2 == phone.type_phone %>
+												Fiksni
+											<% end %>
+										</dd>
+									<% else %>
+										<dd>N/A</dd>
+									<% end %>
+								<% end %>
+							</div>
+						</dl>
+					</div>
+				</div>
+			</div>
+
+			<%= render 'contracts/list' %>
+	</div>
+

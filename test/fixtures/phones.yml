@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  oib: MyString
+  number: MyString
+  type: 1
+
+two:
+  oib: MyString
+  number: MyString
+  type: 1

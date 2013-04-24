@@ -1,0 +1,88 @@
+
+<% if flash[:notice] -%>
+	<br />
+	<div class="alert alert-success">
+		<button type="button" class="close" data-dismiss="alert">×</button>
+		<strong>Uspješno</strong> ste dodali novi ugovor!
+	</div>
+<% end -%>
+
+  <div class="row-fluid content">
+	<div class="span12 content-left">
+	  <h2>Podaci o ugovoru - <%= @contract.id %></h2>
+	  <div class="row-fluid">
+			<div class="span12 well">
+				<div class="span3">
+					<dl class="dl-horizontal">
+						<div class="well well-small well-show">
+							<dt>Klijent:</dt>
+							<% if @contract.client.name %>
+							  <dd><%= @contract.client.name %></dd>
+							<% else %>
+							  <dd>N/A</dd>
+							<% end %>
+						</div>
+						<div class="well well-small well-show">
+						<!--<dt>Proizvod:</dt>
+						<%# for product in @contract.products %>
+							<%# if product.name %>
+								<dd><%# product.name %></dd>
+							<%# else %>
+								<dd>N/A</dd>
+							<%# end %>
+						<%# end %>
+						</div>
+					</dl>
+				</div>
+				<div class="span4">
+					<dl class="dl-horizontal">
+                        <div class="well well-small well-show">
+                    	<dt>Nabavna cijena:</dt>
+                    	<%# for product in @contract.products %>
+							<%# if product.purchase_price %>
+								<dd><%# product.purchase_price %></dd>
+							<%# else %>
+								<dd>N/A</dd>
+							<%# end %>
+						<%# end %>
+						</div>-->
+                        <div class="well well-small well-show">
+                        	<dt>Prodajna cijena:</dt>
+                            <% if @contract.selling_price %>
+                              <dd><%= number_with_precision(@contract.selling_price, :precision => 2)  %></dd>
+                            <% else %>
+                              <dd>N/A</dd>
+                            <% end %>
+                        </div>
+					</dl>
+				</div>
+				<div class="span4">
+					<dl class="dl-horizontal">
+						<div class="well well-small well-show">
+							<dt>Količina:</dt>
+							<% if @contract.quantity %>
+							  <dd><%= @contract.quantity %></dd>
+							<% else %>
+							  <dd>N/A</dd>
+							<% end %>
+                        </div>
+                        <div class="well well-small well-show">
+                            <dt>Razlika:</dt>
+                            <% if @contract.difference_price %>
+                              <dd><%= number_with_precision(@contract.difference_price, :precision => 2) %></dd>
+                            <% else %>
+                              <dd>N/A</dd>
+                            <% end %>
+                        </div>
+					</dl>
+				</div>
+			</div>
+			<div class="row-fluid">
+				<div class="form-actions">
+					<% if current_user.has_role? :admin %>
+					<%= link_to 'Uredi', edit_contract_path(@contract), :class => "btn btn-warning btn-edit btn-coffee" %>
+					<% end %>
+				</div> 
+			</div>
+	  </div>
+	</div>
